@@ -3,6 +3,7 @@ package com.minnity.report;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public class RequestLog {
 
@@ -81,6 +82,19 @@ public class RequestLog {
         .append("requestMethod", requestMethod)
         .append("createdTime", createdTime)
         .toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    RequestLog that = (RequestLog) o;
+    return userId == that.userId && companyId == that.companyId && requestDuration == that.requestDuration && requestStatus == that.requestStatus && geoLocation.equals(that.geoLocation) && requestPath.equals(that.requestPath) && requestMethod.equals(that.requestMethod) && createdTime.equals(that.createdTime);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(userId, companyId, geoLocation, requestDuration, requestStatus, requestPath, requestMethod, createdTime);
   }
 
   public static final class RequestLogBuilder {
